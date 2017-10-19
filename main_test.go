@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ecr"
 	"github.com/stretchr/testify/assert"
-	"github.com/upmc-enterprises/registry-creds/k8sutil"
+	"github.com/GoatWalker/registry-creds/k8sutil"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	coreType "k8s.io/client-go/kubernetes/typed/core/v1"
