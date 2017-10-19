@@ -37,7 +37,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ecr"
 	flag "github.com/spf13/pflag"
-	"github.com/upmc-enterprises/registry-creds/k8sutil"
+	"github.com/GoatWalker/registry-creds/k8sutil"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
