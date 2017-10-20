@@ -390,17 +390,17 @@ func TestProcessOnce(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, *argAWSSecretName, secret.Name)
 	assert.Equal(t, map[string][]byte{
-		".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
+		"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
 	}, secret.Data)
-	assert.Equal(t, v1.SecretType("kubernetes.io/dockerconfigjson"), secret.Type)
+	assert.Equal(t, v1.SecretType("kubernetes.io/configjson"), secret.Type)
 
 	secret, err = c.k8sutil.GetSecret("namespace2", *argAWSSecretName)
 	assert.Nil(t, err)
 	assert.Equal(t, *argAWSSecretName, secret.Name)
 	assert.Equal(t, map[string][]byte{
-		".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
+		"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
 	}, secret.Data)
-	assert.Equal(t, v1.SecretType("kubernetes.io/dockerconfigjson"), secret.Type)
+	assert.Equal(t, v1.SecretType("kubernetes.io/configjson"), secret.Type)
 
 	_, err = c.k8sutil.GetSecret("kube-system", *argAWSSecretName)
 	assert.NotNil(t, err)
@@ -461,17 +461,17 @@ func TestProcessTwice(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, *argAWSSecretName, secret.Name)
 	assert.Equal(t, map[string][]byte{
-		".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
+		"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
 	}, secret.Data)
-	assert.Equal(t, v1.SecretType("kubernetes.io/dockerconfigjson"), secret.Type)
+	assert.Equal(t, v1.SecretType("kubernetes.io/configjson"), secret.Type)
 
 	secret, err = c.k8sutil.GetSecret("namespace2", *argAWSSecretName)
 	assert.Nil(t, err)
 	assert.Equal(t, *argAWSSecretName, secret.Name)
 	assert.Equal(t, map[string][]byte{
-		".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
+		"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
 	}, secret.Data)
-	assert.Equal(t, v1.SecretType("kubernetes.io/dockerconfigjson"), secret.Type)
+	assert.Equal(t, v1.SecretType("kubernetes.io/configjson"), secret.Type)
 
 	_, err = c.k8sutil.GetSecret("kube-system", *argAWSSecretName)
 	assert.NotNil(t, err)
@@ -515,7 +515,7 @@ func TestProcessWithExistingSecrets(t *testing.T) {
 			Name: *argAWSSecretName,
 		},
 		Data: map[string][]byte{
-			".dockerconfigjson": []byte("some other config"),
+			"config.json": []byte("some other config"),
 		},
 		Type: "some other type",
 	}
@@ -530,7 +530,7 @@ func TestProcessWithExistingSecrets(t *testing.T) {
 			Name: *argDPRSecretName,
 		},
 		Data: map[string][]byte{
-			".dockerconfigjson": []byte("some other config"),
+			"config.json": []byte("some other config"),
 		},
 		Type: "some other type",
 	}
@@ -580,50 +580,50 @@ func TestProcessWithExistingSecrets(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, *argAWSSecretName, secretAWS.Name)
 	assert.Equal(t, map[string][]byte{
-		".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
+		"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
 	}, secretAWS.Data)
-	assert.Equal(t, secretAWS.Type, v1.SecretType("kubernetes.io/dockerconfigjson"))
+	assert.Equal(t, secretAWS.Type, v1.SecretType("kubernetes.io/configjson"))
 
 	secretAWS, err = c.k8sutil.GetSecret("namespace2", *argAWSSecretName)
 	assert.Nil(t, err)
 	assert.Equal(t, *argAWSSecretName, secretAWS.Name)
 	assert.Equal(t, map[string][]byte{
-		".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
+		"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
 	}, secretAWS.Data)
-	assert.Equal(t, v1.SecretType("kubernetes.io/dockerconfigjson"), secretAWS.Type)
+	assert.Equal(t, v1.SecretType("kubernetes.io/configjson"), secretAWS.Type)
 
 	secretAWS, err = c.k8sutil.GetSecret("namespace1", *argAWSSecretName)
 	assert.Nil(t, err)
 	assert.Equal(t, *argAWSSecretName, secretAWS.Name)
 	assert.Equal(t, map[string][]byte{
-		".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
+		"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
 	}, secretAWS.Data)
-	assert.Equal(t, secretAWS.Type, v1.SecretType("kubernetes.io/dockerconfigjson"))
+	assert.Equal(t, secretAWS.Type, v1.SecretType("kubernetes.io/configjson"))
 
 	secretAWS, err = c.k8sutil.GetSecret("namespace2", *argAWSSecretName)
 	assert.Nil(t, err)
 	assert.Equal(t, *argAWSSecretName, secretAWS.Name)
 	assert.Equal(t, map[string][]byte{
-		".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
+		"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
 	}, secretAWS.Data)
-	assert.Equal(t, v1.SecretType("kubernetes.io/dockerconfigjson"), secretAWS.Type)
+	assert.Equal(t, v1.SecretType("kubernetes.io/configjson"), secretAWS.Type)
 
 	// Test Private Docker Registry
 	secretDPR, err = c.k8sutil.GetSecret("namespace1", *argDPRSecretName)
 	assert.Nil(t, err)
 	assert.Equal(t, *argDPRSecretName, secretDPR.Name)
 	assert.Equal(t, map[string][]byte{
-		".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
+		"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
 	}, secretDPR.Data)
-	assert.Equal(t, v1.SecretType("kubernetes.io/dockerconfigjson"), secretDPR.Type)
+	assert.Equal(t, v1.SecretType("kubernetes.io/configjson"), secretDPR.Type)
 
 	secretDPR, err = c.k8sutil.GetSecret("namespace2", *argDPRSecretName)
 	assert.Nil(t, err)
 	assert.Equal(t, *argDPRSecretName, secretDPR.Name)
 	assert.Equal(t, map[string][]byte{
-		".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
+		"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, "fakeEndpoint", "fakeToken")),
 	}, secretDPR.Data)
-	assert.Equal(t, v1.SecretType("kubernetes.io/dockerconfigjson"), secretDPR.Type)
+	assert.Equal(t, v1.SecretType("kubernetes.io/configjson"), secretDPR.Type)
 }
 
 // func TestProcessNoDefaultServiceAccount(t *testing.T) {
