@@ -199,8 +199,8 @@ func generateSecretObj(token string, endpoint string, isJSONCfg bool, secretName
 	}
 	if isJSONCfg {
 		secret.Data = map[string][]byte{
-			".dockerconfigjson": []byte(fmt.Sprintf(dockerJSONTemplate, endpoint, token))}
-		secret.Type = "kubernetes.io/dockerconfigjson"
+			"config.json": []byte(fmt.Sprintf(dockerJSONTemplate, endpoint, token))}
+		secret.Type = "kubernetes.io/configjson"
 	} else {
 		secret.Data = map[string][]byte{
 			".dockercfg": []byte(fmt.Sprintf(dockerCfgTemplate, endpoint, token))}
